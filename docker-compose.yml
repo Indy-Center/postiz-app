@@ -8,7 +8,7 @@ services:
       MAIN_URL: "https://postiz.zidartcc.org"
       FRONTEND_URL: "https://postiz.zidartcc.org"
       NEXT_PUBLIC_BACKEND_URL: "https://postiz.zidartcc.org/api"
-      JWT_SECRET: "${{ secrets.JWT_SECRET }}"
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
  
       # These defaults are probably fine, but if you change your user/password, update it in the
       # postiz-postgres or postiz-redis services below.
