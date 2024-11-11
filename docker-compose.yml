@@ -8,6 +8,7 @@ services:
       MAIN_URL: "https://postiz.zidartcc.org"
       FRONTEND_URL: "https://postiz.zidartcc.org"
       NEXT_PUBLIC_BACKEND_URL: "https://postiz.zidartcc.org/api"
+      JWT_SECRET: ${JWT_SECRET}
       DATABASE_URL: "postgresql://${POSTIZ_USER}:${POSTIZ_PASSWORD}@postiz-postgres:5432/postiz-db-local"
       REDIS_URL: "redis://postiz-redis:6379"
       BACKEND_INTERNAL_URL: "http://localhost:3000"
