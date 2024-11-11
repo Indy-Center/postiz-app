@@ -5,11 +5,10 @@ services:
     container_name: postiz
     restart: unless-stopped
     environment:
-      JWT_SECRET: "${JWT_SECRET}"
       MAIN_URL: "https://postiz.zidartcc.org"
       FRONTEND_URL: "https://postiz.zidartcc.org"
       NEXT_PUBLIC_BACKEND_URL: "https://postiz.zidartcc.org/api"
-      DATABASE_URL: "${DATABSE_URL}"
+      DATABASE_URL: "postgresql://${POSTIZ_USER}:${POSTIZ_PASSWORD}@postiz-postgres:5432/postiz-db-local"
       REDIS_URL: "redis://postiz-redis:6379"
       BACKEND_INTERNAL_URL: "http://localhost:3000"
       IS_GENERAL: "true" # Required for self-hosting.

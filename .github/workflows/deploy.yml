@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      DATABASE_URL: "postgresql://${{ secrets.POSTIZ_USER }}:${{ secrets.POSTIZ_PASSWORD }}@postiz-postgres:5432/postiz-db-local"
       POSTGRES_PASSWORD: ${{ secrets.POSTIZ_PASSWORD }}
       POSTGRES_USER: ${{ secrets.POSTIZ_USER }}
 
@@ -34,7 +33,14 @@ jobs:
       - name: Copy Files to VPS
         run: |
           rsync -av . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/docker/postiz
-
+          
       - name: Deploy with Docker Compose
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/docker/postiz && docker compose down && docker compose up -d"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd /home/docker/postiz && \
+            docker compose down && \
+            POSTIZ_USER=${{ secrets.POSTIZ_USER }} \
+            POSTIZ_PASSWORD=${{ secrets.POSTIZ_PASSWORD }} \
+            JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            docker compose up -d
+          "
