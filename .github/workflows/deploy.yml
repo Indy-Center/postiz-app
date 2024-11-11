@@ -36,4 +36,4 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/docker/postiz && docker compose down && docker compose up -d --build"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/docker/postiz && docker compose down && docker compose up -d"
