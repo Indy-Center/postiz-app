@@ -9,10 +9,6 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    env:
-      JWT_SECTRET: ${{ secrets.JWT_SECRET }}
-      POSTIZ_USER: ${{ secrets.POSTIZ_USER }}
-      POSTIZ_PASSWORD: ${{ secrets.POSTIZ_PASSWORD }}
 
     steps:
       - name: Checkout Repo
