@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    enviroment: prod
 
     steps:
       - name: Checkout Repo
