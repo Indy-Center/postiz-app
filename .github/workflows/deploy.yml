@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      JWT_SECRET: 
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       DATABASE_URL: "postgresql://${{ secrets.POSTIZ_USER }}:${{} secrets.POSTIZ_PASSWORD }}@postiz-postgres:5432/postiz-db-local"
       POSTGRES_PASSWORD: ${{ secrets.POSTIZ_PASSWORD }}
       POSTGRES_USER: ${{ secrets.POSTIZ_USER }}
