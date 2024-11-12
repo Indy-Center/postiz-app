@@ -4,7 +4,7 @@ services:
     image: ghcr.io/gitroomhq/postiz-app:latest
     container_name: postiz
     restart: unless-stopped
-    env_file: /config/postiz.env
+    env_file: config/postiz.env
     volumes:
       - postiz-config:/config/
       - postiz-uploads:/uploads/
@@ -29,7 +29,7 @@ services:
     image: postgres:17-alpine
     container_name: postiz-postgres
     restart: unless-stopped
-    env_file: /config/postiz.env
+    env_file: config/postiz.env
     volumes:
       - postgres-volume:/var/lib/postgresql/data
     networks:
