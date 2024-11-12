@@ -19,6 +19,7 @@ services:
       - traefik.http.routers.postiz-https.tls=true
       - traefik.http.routers.postiz-https.entrypoints=websecure
       - traefik.http.routers.postiz-https.rule=Host(`postiz.zidartcc.org`)
+      - "traefik.http.services.postiz.loadbalancer.server.port=5000"  # Internal port for postiz
     depends_on:
       postiz-postgres:
         condition: service_healthy
