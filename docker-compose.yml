@@ -32,7 +32,6 @@ services:
     env_file: /config/postiz.env
     volumes:
       - postgres-volume:/var/lib/postgresql/data
-      - config:/config/
     networks:
       - postiz-network
     healthcheck:
