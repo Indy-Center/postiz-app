@@ -34,10 +34,29 @@ jobs:
         run: |
           rsync -av . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/docker/postiz
 
+      - name: SSH into VPS and create .env file
+       run: |
+         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+           echo 'MAIN_URL=https://postiz.zidartcc.org' > /home/docker/postiz/config/postiz.env && \
+           echo 'FRONTEND_URL=https://postiz.zidartcc.org' >> /home/docker/postiz/config/postiz.env && \
+           echo 'NEXT_PUBLIC_BACKEND_URL=https://postiz.zidartcc.org/api' >> /home/docker/postiz/config/postiz.env && \
+           echo 'JWT_SECRET=${{ secrets.JWT_SECRET }}' >> /home/docker/postiz/config/postiz.env && \
+           echo 'DATABASE_URL=postgresql://${{ secrets.POSTIZ_USER }}:${{ secrets.POSTIZ_PASSWORD }}@postiz-postgres:5432/postiz-db-local' >> /home/docker/postiz/config/postiz.env && \
+           echo 'REDIS_URL=redis://postiz-redis:6379' >> /home/docker/postiz/config/postiz.env && \
+           echo 'BACKEND_INTERNAL_URL=http://localhost:3000' >> /home/docker/postiz/config/postiz.env && \
+           echo 'IS_GENERAL=true' >> /home/docker/postiz/config/postiz.env && \
+           echo 'STORAGE_PROVIDER=local' >> /home/docker/postiz/config/postiz.env && \
+           echo 'UPLOAD_DIRECTORY=/uploads' >> /home/docker/postiz/config/postiz.env && \
+           echo 'NEXT_PUBLIC_UPLOAD_DIRECTORY=/uploads' >> /home/docker/postiz/config/postiz.env && \
+           echo 'POSTGRES_PASSWORD=${{ secrets.POSTIZ_PASSWORD }}' >> /home/docker/postiz/config/postiz.env && \
+           echo 'POSTGRES_USER=${{ secrets.POSTIZ_USER }}' >> /home/docker/postiz/config/postiz.env && \
+           echo 'POSTGRES_DB=postiz-db-local' >> /home/docker/postiz/config/postiz.env
+         "
+
       - name: Deploy with Docker Compose
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
             cd /home/docker/postiz && \
             docker compose down && \
-            POSTIZ_USER=${{ secrets.POSTIZ_USER }} POSTIZ_PASSWORD=${{ secrets.POSTIZ_PASSWORD }} JWT_SECRET=${{ secrets.JWT_SECRET }} docker compose up -d
+            docker compose up -d
           "
