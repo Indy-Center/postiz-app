@@ -38,6 +38,7 @@ jobs:
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
             mkdir -p /home/docker/postiz/config/
+            rm /home/docker/postiz/config/postiz.env
             echo 'MAIN_URL=https://postiz.zidartcc.org' > /home/docker/postiz/config/postiz.env && \
             echo 'FRONTEND_URL=https://postiz.zidartcc.org' >> /home/docker/postiz/config/postiz.env && \
             echo 'NEXT_PUBLIC_BACKEND_URL=https://postiz.zidartcc.org/api' >> /home/docker/postiz/config/postiz.env && \
