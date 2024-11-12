@@ -15,11 +15,11 @@ services:
       - frontend
     labels:
       # Router for main Postiz entrypoint (on port 5000)
-      - traefik.enable=true
-      - traefik.http.services.postiz.loadbalancer.server.port=5000  # Internal port for postiz
-      - traefik.http.routers.postiz-https.tls=true
-      - traefik.http.routers.postiz-https.entrypoints=websecure
-      - traefik.http.routers.postiz-https.rule=Host(`postiz.zidartcc.org`)
+      - "traefik.enable=true"
+      - "traefik.http.services.postiz.loadbalancer.server.port=5000"  # Internal port for postiz
+      - "traefik.http.routers.postiz-https.tls=true"
+      - "traefik.http.routers.postiz-https.entrypoints=websecure"
+      - "traefik.http.routers.postiz-https.rule=Host(`postiz.zidartcc.org`)"
     depends_on:
       postiz-postgres:
         condition: service_healthy
